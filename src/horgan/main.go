@@ -7,7 +7,6 @@ import (
 )
 
 func flywayMigration(wg *sync.WaitGroup) {
-	fmt.Println("Migration migrate")
 	out, err := exec.Command("flyway", "migrate").Output()
 	
 	if err != nil {
@@ -20,15 +19,13 @@ func flywayMigration(wg *sync.WaitGroup) {
 }
 
 func initialize() {
-	fmt.Println("Migration init")
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	flywayMigration(wg)
+	go flywayMigration(wg)
 	
 	wg.Wait()
 }
 
 func main() {
 	initialize()
-	fmt.Println("Migration ran")
 }
