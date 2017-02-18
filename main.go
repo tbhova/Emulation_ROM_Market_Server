@@ -1,5 +1,0 @@
-package horgan
-
-func main() {
-
-}
