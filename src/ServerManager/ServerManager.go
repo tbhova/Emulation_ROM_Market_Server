@@ -7,7 +7,10 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc"
 	pb "MarketServer"
+	"UserServer"
 )
+
+var s *grpc.Server
 
 func init() {
 	lis, err := net.Listen("tcp", port)
@@ -35,6 +38,15 @@ func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloRe
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
+// Define UsernameAvailable with server
+func (s *server) CheckUser(ctx context.Context, in *userserver.UserQuery) (*userserver.UsernameAvailable, error) {
+	var status bool = in.Username == "UNAME"
+	return &userserver.UsernameAvailable{Exists: status}, nil
+}
+
+//TODO other userserver methods in server
+
+
 
 func RunServers() {
 	runLoginServer()
@@ -43,7 +55,7 @@ func RunServers() {
 }
 
 func runLoginServer() {
-	
+	userserver.RegisterUserServerServer(s, &server{})
 }
 
 func runAvailableDownloads() {
