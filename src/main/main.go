@@ -18,7 +18,7 @@ func flywayMigration(wg *sync.WaitGroup) {
 	wg.Done()
 }
 
-func initialize() {
+func init() {
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
 	go flywayMigration(wg)
@@ -27,5 +27,5 @@ func initialize() {
 }
 
 func main() {
-	initialize()
+
 }
