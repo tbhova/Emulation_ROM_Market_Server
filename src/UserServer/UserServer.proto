@@ -8,8 +8,8 @@ package userserver;
 // The user service definition.
 service UserServer {
     // Sends a check for username in use
-    rpc UserExists (UserQuery) returns (UsernameAvailable) {}
-    rpc LoginUser (LoginRequest) returns (LoginReply) {}
+    rpc CheckUserExists (UserQuery) returns (UsernameAvailable) {}
+    rpc UserLogin (LoginRequest) returns (LoginReply) {}
     rpc RegisterUser (RegisterRequest) returns (RegisterStatus) {}
 }
 
