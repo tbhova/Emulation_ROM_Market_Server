@@ -4,6 +4,7 @@ import (
 	"os/exec"
 	"fmt"
 	"sync"
+	"ServerManager"
 )
 
 func flywayMigration(wg *sync.WaitGroup) {
@@ -27,5 +28,5 @@ func init() {
 }
 
 func main() {
-
+	ServerManager.RunServers()
 }
