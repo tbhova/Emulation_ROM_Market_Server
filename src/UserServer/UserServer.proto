@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "horgan.UserServer";
+option java_outer_classname = "UserServerProto";
+package userserver;
+
+// The user service definition.
+service UserServer {
+    // Sends a check for username in use
+    rpc UserExists (UserQuery) returns (UsernameAvailable) {}
+    rpc LoginUser (LoginRequest) returns (LoginReply) {}
+    rpc RegisterUser (RegisterRequest) returns (RegisterStatus) {}
+}
+
+// The request query containing the user's name.
+message UserQuery {
+    string username = 1;
+}
+
+// The response message containing whether the username exists
+message UsernameAvailable {
+    bool exists = 1;
+}
+
+// The request message containing the username and password
+message LoginRequest {
+    string username = 1;
+    string password = 2;
+}
+
+// The reponse message containing the login sucess status
+message LoginReply {
+    int32 status = 1;
+}
+
+// The request message containing the username and password
+message RegisterRequest {
+    string username = 1;
+    string password = 2;
+    string email = 3;
+    string fistName = 4;
+    string lastName = 5;
+}
+
+// The reponse message containing the login sucess status
+message RegisterStatus {
+    int32 status = 1;
+}
