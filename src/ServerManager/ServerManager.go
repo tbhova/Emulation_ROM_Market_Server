@@ -41,5 +41,5 @@ func RunServers() {
 	// run function from UserServerManager file, but is in the same package
 	RunLoginServer(s)
 	RunUserDownloadServer(s)
-	
+	RunAvailableGameServer(s)
 }
