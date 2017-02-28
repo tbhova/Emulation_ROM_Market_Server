@@ -13,9 +13,10 @@ service UserServer {
     rpc RegisterUser (RegisterRequest) returns (RegisterStatus) {}
 }
 
-// The request query containing the user's name.
+// The request query containing the username and/or email.
 message UserQuery {
     string username = 1;
+    string email = 2;
 }
 
 // The response message containing whether the username exists
@@ -31,7 +32,12 @@ message LoginRequest {
 
 // The reponse message containing the login sucess status
 message LoginReply {
-    int32 status = 1;
+    enum LoginError {
+        OK = 0;
+        NONEXISTANT_USERNAME = 1;
+        BAD_PASSWORD = 2;
+    }
+    LoginError status = 1;
 }
 
 // The request message containing the username and password
@@ -45,5 +51,11 @@ message RegisterRequest {
 
 // The reponse message containing the login sucess status
 message RegisterStatus {
-    int32 status = 1;
+    enum Error {
+        OK = 0;
+        TAKEN_USERNAME = 1;
+        BAD_PASSWORD = 2;
+        TAKEN_EMAIL = 3;
+    }
+    Error error = 1;
 }

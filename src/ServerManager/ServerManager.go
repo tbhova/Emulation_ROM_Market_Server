@@ -7,7 +7,6 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc"
 	pb "MarketServer"
-	"UserServer"
 )
 
 var s *grpc.Server
@@ -18,8 +17,8 @@ func init() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	s := grpc.NewServer()
-	pb.RegisterGreeterServer(s, &server{})
-	// Register reflection service on gRPC server.
+	pb.RegisterGreeterServer(s, &GreetingServer{})
+	// Register reflection service on gRPC GreetingServer.
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
@@ -30,28 +29,17 @@ const (
 	port = ":50051"
 )
 
-// server is used to implement server.
-type server struct{}
+// Server types used to implement servers.
+type GreetingServer struct{}
 
 // SayHello implements helloworld.GreeterServer
-func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *GreetingServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
 func RunServers() {
-	runLoginServer()
-	runAvailableDownloads()
-	runDownloadServer()
-}
-
-func runLoginServer() {
-	userserver.RegisterUserServerServer(s, &server{})
-}
-
-func runAvailableDownloads() {
-	
-}
-
-func runDownloadServer() {
+	// run function from UserServerManager file, but is in the same package
+	RunLoginServer(s)
+	RunUserDownloadServer(s)
 	
 }

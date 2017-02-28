@@ -24,7 +24,7 @@ message DownloadRequest {
 // The response message containing either the download URL or error
 message DownloadResponse {
     bool available = 1;
-    optional string S3DownloadLink = 2;
+    string S3DownloadLink = 2;
 }
 
 // per username give a list of games that the user can download
@@ -32,17 +32,10 @@ message UserDownloadListRequest {
     string username = 1;
 }
 
-message GameDetails {
+message Game {
     string id = 1;
-    string title = 2;
-    string console = 3;
-    string releaseDate = 4;
-    string developer = 5;
-    string publisher = 6;
-    string genre = 7;
-    int32 players = 8;
 }
 
 message DownloadsList {
-    repeated GameDetails games = 1;
+    repeated Game games = 1;
 }
