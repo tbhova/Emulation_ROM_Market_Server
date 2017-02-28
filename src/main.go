@@ -23,10 +23,9 @@ func init() {
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
 	go flywayMigration(wg)
-	
 	wg.Wait()
 }
 
 func main() {
-	ServerManager.RunServers()
+	ServerManager.Run()
 }

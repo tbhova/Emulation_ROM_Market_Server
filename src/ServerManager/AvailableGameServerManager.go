@@ -1,9 +1,9 @@
 package ServerManager
 
 import (
-	"google.golang.org/grpc"
 	GameServer "AvailableGamesServer"
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 )
 
 // Data type used to implement the AvailableGameServer

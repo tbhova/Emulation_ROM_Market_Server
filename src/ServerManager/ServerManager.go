@@ -16,13 +16,16 @@ func init() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
-	s := grpc.NewServer()
+	s = grpc.NewServer()
 	pb.RegisterGreeterServer(s, &GreetingServer{})
 	// Register reflection service on gRPC GreetingServer.
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+	RunLoginServer(s)
+	RunUserDownloadServer(s)
+	RunAvailableGameServer(s)
 }
 
 const (
@@ -37,9 +40,6 @@ func (s *GreetingServer) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb
 	return &pb.HelloReply{Message: "Hello " + in.Name}, nil
 }
 
-func RunServers() {
-	// run function from UserServerManager file, but is in the same package
-	RunLoginServer(s)
-	RunUserDownloadServer(s)
-	RunAvailableGameServer(s)
+func Run() {
+	
 }
