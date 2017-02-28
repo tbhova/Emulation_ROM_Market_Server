@@ -13,15 +13,22 @@ func RunAvailableGameServer(s* grpc.Server) {
 	GameServer.RegisterAvialableGameServerServer(s, &AvailableGameServer{})
 }
 
-func (s *AvailableGameServer) getAvailableGamesList(ctx context.Context, in GameServer.GameFilters) (GameServer.GameIdList, error) {
+func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *GameServer.GameFilters) (*GameServer.GameIdList, error) {
 	var ids []*(GameServer.GameId) = make([]*(GameServer.GameId), 1)
 	ids[0] = &GameServer.GameId{"id 1"}
 	
-	return GameServer.GameIdList{ids}, nil
+	return &GameServer.GameIdList{ids}, nil
 }
 
-func (s *AvailableGameServer) getGameDetails(ctx context.Context, in GameServer.GameId) (GameServer.GameDetails, error) {
+func (s *AvailableGameServer) GetGameDetails(ctx context.Context, in *GameServer.GameId) (*GameServer.GameDetails, error) {
 	var details GameServer.GameDetails
 	details.Console = "nes"
-	
+	details.Id = "0"
+	details.Title = "The Italian Plumber"
+	details.ReleaseDate = "01/12/1990"
+	details.Developer = "Horgan"
+	details.Publisher = "Horgan"
+	details.Genre = "Platformer"
+	details.Players = 2
+	return &details, nil
 }

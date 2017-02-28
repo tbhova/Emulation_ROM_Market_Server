@@ -7,8 +7,8 @@ package availablegameserver;
 
 // The user service definition.
 service AvialableGameServer {
-    rpc getAvailableGamesList (GameFilters) returns (GameIdList) {}
-    rpc getGameDetails (GameId) returns (GameDetails) {}
+    rpc GetAvailableGamesList (GameFilters) returns (GameIdList) {}
+    rpc GetGameDetails (GameId) returns (GameDetails) {}
 }
 
 // The request query containing the any search filters (none supported yet)
