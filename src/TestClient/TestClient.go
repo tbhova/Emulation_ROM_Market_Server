@@ -2,6 +2,7 @@ package main
 
 import (
 	pb "MarketServer"
+	games "AvailableGamesServer"
 	"log"
 	"os"
 	"google.golang.org/grpc"
@@ -32,4 +33,9 @@ func main() {
 		log.Fatalf("could not greet: %v", err)
 	}
 	log.Printf("Greeting: %s", r.Message)
+	
+	game := games.NewAvialableGameServerClient(conn)
+	gamelist, err := game.GetAvailableGamesList(context.Background(),&games.GameFilters{})
+	log.Print(err)
+	log.Print(gamelist)
 }
