@@ -18,14 +18,16 @@ func init() {
 	}
 	s = grpc.NewServer()
 	pb.RegisterGreeterServer(s, &GreetingServer{})
+	
+	RunLoginServer(s)
+	RunUserDownloadServer(s)
+	RunAvailableGameServer(s)
+	
 	// Register reflection service on gRPC GreetingServer.
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
-	RunLoginServer(s)
-	RunUserDownloadServer(s)
-	RunAvailableGameServer(s)
 }
 
 const (
