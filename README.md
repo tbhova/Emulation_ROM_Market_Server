@@ -20,5 +20,5 @@ Run the following commands from within the root of the repository
 ```
 go get github.com/lib/pq
 go get google.golang.org/grpc
-
+go get -u github.com/golang/lint/golint
 ```
