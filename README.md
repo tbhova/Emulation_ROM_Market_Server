@@ -15,6 +15,8 @@ Also get the GogLand Protoc plugin (install within the IDE)
 
 [Lastest protoc](https://github.com/google/protobuf/releases)
 
+Protoc needs to be placed somewhere on the path
+
 # Go Packages
 
 Run the following commands:
