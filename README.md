@@ -13,6 +13,8 @@ Also get the GogLand Protoc plugin (install within the IDE)
 
 [Postgres](https://www.postgresql.org/download/)
 
+[Lastest protoc](https://github.com/google/protobuf/releases)
+
 # Go Packages
 
 Run the following commands:
