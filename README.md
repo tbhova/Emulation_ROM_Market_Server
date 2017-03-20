@@ -15,7 +15,7 @@ Also get the GogLand Protoc plugin (install within the IDE)
 
 # Go Packages
 
-Run the following commands from within the root of the repository
+Run the following commands:
 
 ```
 go get github.com/lib/pq
@@ -24,3 +24,9 @@ go get -u github.com/golang/lint/golint
 go get -u github.com/golang/protobuf/protoc-gen-go
 go get -u github.com/golang/protobuf/proto
 ```
+
+So We can use protoc (protobuf compiler):
+
+```
+export PATH=$PATH:$GOPATH/bin
+````
