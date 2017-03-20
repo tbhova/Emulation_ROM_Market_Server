@@ -3,13 +3,12 @@ package ServerManager
 import (
 	GameServer "AvailableGamesServer"
 	"golang.org/x/net/context"
-	"google.golang.org/grpc"
 )
 
 // Data type used to implement the AvailableGameServer
 type AvailableGameServer struct{}
 
-func RunAvailableGameServer(s* grpc.Server) {
+func RunAvailableGameServer() {
 	GameServer.RegisterAvialableGameServerServer(s, &AvailableGameServer{})
 }
 

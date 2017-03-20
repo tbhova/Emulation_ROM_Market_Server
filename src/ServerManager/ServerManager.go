@@ -7,11 +7,21 @@ import (
 	"google.golang.org/grpc/reflection"
 	"google.golang.org/grpc"
 	pb "MarketServer"
+	"database/sql"
+	_ "github.com/lib/pq"
 )
 
 var s *grpc.Server
 
+var db *sql.DB = nil
+
 func init() {
+	var err error
+	db, err = sql.Open("postgres", "user=postgres password=hespw123 dbname=content sslmode=verify-full")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -19,15 +29,17 @@ func init() {
 	s = grpc.NewServer()
 	pb.RegisterGreeterServer(s, &GreetingServer{})
 	
-	RunLoginServer(s)
-	RunUserDownloadServer(s)
-	RunAvailableGameServer(s)
+	RunLoginServer()
+	RunUserDownloadServer()
+	RunAvailableGameServer()
 	
 	// Register reflection service on gRPC GreetingServer.
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
 	}
+
+
 }
 
 const (

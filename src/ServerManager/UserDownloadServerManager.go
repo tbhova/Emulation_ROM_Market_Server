@@ -1,14 +1,13 @@
 package ServerManager
 
 import (
-	"google.golang.org/grpc"
 	DownloadServer "UserDownloadServer"
 	"golang.org/x/net/context"
 )
 
 type UserDownloadServer struct{}
 
-func RunUserDownloadServer(s* grpc.Server) {
+func RunUserDownloadServer() {
 	DownloadServer.RegisterUserDownloadServerServer(s, &UserDownloadServer{})
 }
 
