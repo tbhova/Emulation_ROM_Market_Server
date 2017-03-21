@@ -38,6 +38,7 @@ message LoginReply {
         BAD_PASSWORD = 2;
     }
     LoginError status = 1;
+    string id = 2;
 }
 
 // The request message containing the username and password
