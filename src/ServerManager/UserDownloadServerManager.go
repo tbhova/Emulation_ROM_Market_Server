@@ -7,7 +7,6 @@ import (
 	"UserServer"
 	"errors"
 	"database/sql"
-	"strings"
 )
 
 type UserDownloadServer struct{}
@@ -22,7 +21,8 @@ func (s *UserDownloadServer) DownloadGame(ctx context.Context, in *DownloadServe
 	response.S3DownloadLink = ""
 	
 	// Check for valid user credentials
-	loginResponse, err := LoginServer{}.UserLogin(context.Background(), &UserServer.LoginRequest{Username: in.Username, Password: in.Password})
+	var login *LoginServer
+	loginResponse, err := login.UserLogin(context.Background(), &(UserServer.LoginRequest{Username: in.Username, Password: in.Password}))
 	if err != nil || loginResponse.Status != UserServer.LoginReply_OK {
 		log.Printf("DownloadGame: invalid credentials provided for user %s", in.Username)
 		return &response, errors.New("User login creditials invalid")
