@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "horgan.MarketServer";
 option java_outer_classname = "MarketServerProto";
-package marketserver;
+package MarketServer;
 
 // The greeting service definition.
 service Greeter {

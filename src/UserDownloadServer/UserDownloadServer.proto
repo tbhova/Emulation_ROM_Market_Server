@@ -3,7 +3,7 @@ syntax = "proto3";
 option java_multiple_files = true;
 option java_package = "horgan.UserDownloadServer";
 option java_outer_classname = "UserDownloadServerProto";
-package userdownloadserver;
+package UserDownloadServer;
 
 // The user service definition.
 service UserDownloadServer {

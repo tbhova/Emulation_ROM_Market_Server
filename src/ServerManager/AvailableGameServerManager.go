@@ -23,6 +23,7 @@ func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *Gam
 		return &GameServer.GameIdList{ids}, err
 	}
 	
+	defer rows.Close()
 	for rows.Next() {
 		var id string
 		err := rows.Scan(id)
@@ -35,6 +36,11 @@ func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *Gam
 		var gameId *GameServer.GameId
 		gameId.Id = id
 		ids = append(ids, gameId)
+	}
+	
+	if err := rows.Err(); err != nil {
+		log.Fatal(err)
+		return nil, err
 	}
 	
 	//ids[0] = &GameServer.GameId{"id 1"}
