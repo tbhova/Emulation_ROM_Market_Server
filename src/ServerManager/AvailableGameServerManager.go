@@ -14,7 +14,7 @@ func RunAvailableGameServer() {
 }
 
 func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *GameServer.GameFilters) (*GameServer.GameIdList, error) {
-	var ids []*(GameServer.GameId) = make([]*(GameServer.GameId), 1)
+	var ids []*(GameServer.GameId) = make([]*(GameServer.GameId), 0)
 	
 	rows, err := db.Query("SELECT ID FROM GAME")
 	

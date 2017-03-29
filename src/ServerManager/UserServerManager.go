@@ -15,9 +15,7 @@ func RunLoginServer() {
 
 // Define UsernameAvailable with GreetingServer datatype
 func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQuery) (*UserServer.UsernameAvailable, error) {
-	var status bool = in.Username == "UNAME"
-	fmt.Println("check username")
-	fmt.Println(in.Username)
+	
 	return &UserServer.UsernameAvailable{Exists: status}, nil
 }
 

@@ -52,7 +52,7 @@ func (s *UserDownloadServer) DownloadGame(ctx context.Context, in *DownloadServe
 }
 
 func (s *UserDownloadServer) AvailableDownloads(ctx context.Context, in *DownloadServer.UserDownloadListRequest) (*DownloadServer.DownloadsList, error) {
-	var downloads []*DownloadServer.Game = make([]*DownloadServer.Game, 1)
+	var downloads []*DownloadServer.Game = make([]*DownloadServer.Game, 0)
 	
 	rows, err := db.Query("SELECT GAME_ID FROM PURCHASE WHERE USER_ID = ?", in.Username)
 	if err != nil {
