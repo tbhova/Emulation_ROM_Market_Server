@@ -1,10 +1,8 @@
 package ServerManager
 
 import (
-	"fmt"
 	"golang.org/x/net/context"
 	"UserServer"
-	"strings"
 	"database/sql"
 	"log"
 )
@@ -18,10 +16,14 @@ func RunLoginServer() {
 
 // Define UsernameAvailable
 func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQuery) (*UserServer.UsernameAvailable, error) {
-	rows, err := db.Query("SELECT USERNAME FROM USERS WHERE USERNAME = ? OR EMAIL = ?", in.Username, in.Email);
+	var reply *UserServer.UsernameAvailable
+	reply.EmailExists = false
+	reply.UsernameExists = false
+	
+	rows, err := db.Query("SELECT USERNAME FROM USERS WHERE USERNAME = ? OR EMAIL = ?", in.Username)
 	if err != nil {
 		log.Fatal(err)
-		return &UserServer.UsernameAvailable{Exists: true}, err
+		return reply, err
 	}
 	
 	for rows.Next() {
@@ -29,13 +31,34 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 		err := rows.Scan(username)
 		if err != nil {
 			log.Fatal(err)
-			return &UserServer.UsernameAvailable{Exists: true}, err
+			return reply, err
 		}
 		if len(username) > 0 {
-			return &UserServer.UsernameAvailable{Exists: true}, err
+			reply.UsernameExists = true
+			return reply, nil
 		}
 	}
-	return &UserServer.UsernameAvailable{Exists: false}, nil
+	
+	rows, err = db.Query("SELECT EMAIL FROM USERS WHERE EMAIL = ?", in.Email)
+	if err != nil {
+		log.Fatal(err)
+		return reply, err
+	}
+	
+	for rows.Next() {
+		var email string
+		err := rows.Scan(email)
+		if err != nil {
+			log.Fatal(err)
+			return reply, err
+		}
+		if len(email) > 0 {
+			reply.EmailExists = true
+			return reply, nil
+		}
+	}
+	
+	return reply, nil
 }
 
 // Define LoginUser
@@ -50,7 +73,7 @@ func (s *LoginServer) UserLogin(ctx context.Context, in *UserServer.LoginRequest
 		return reply, err
 	}
 	
-	if !userExists.Exists {
+	if !userExists.UsernameExists {
 		reply.Status = UserServer.LoginReply_NONEXISTANT_USERNAME
 		return reply, nil
 	}
@@ -83,8 +106,12 @@ func (s *LoginServer) RegisterUser(ctx context.Context, in *UserServer.RegisterR
 		return reply, err
 	}
 	
-	if !userExists.Exists {
+	if userExists.UsernameExists {
 		reply.Status = UserServer.RegisterStatus_TAKEN_USERNAME
+		return reply, nil
+	}
+	if userExists.EmailExists {
+		reply.Status = UserServer.RegisterStatus_TAKEN_EMAIL
 		return reply, nil
 	}
 	

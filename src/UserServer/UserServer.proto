@@ -21,7 +21,8 @@ message UserQuery {
 
 // The response message containing whether the username exists
 message UsernameAvailable {
-    bool exists = 1;
+    bool usernameExists = 1;
+    bool emailExists = 2;
 }
 
 // The request message containing the username and password
