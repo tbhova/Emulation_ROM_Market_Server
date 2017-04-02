@@ -52,11 +52,11 @@ message RegisterRequest {
 
 // The reponse message containing the login sucess status
 message RegisterStatus {
-    enum Error {
+    enum Status {
         OK = 0;
         TAKEN_USERNAME = 1;
-        BAD_PASSWORD = 2;
         TAKEN_EMAIL = 3;
     }
-    Error error = 1;
+    Status status = 1;
+    string userId = 2;
 }

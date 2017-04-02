@@ -20,7 +20,7 @@ func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *Gam
 	
 	if err != nil {
 		log.Fatal(err)
-		return &GameServer.GameIdList{ids}, err
+		return &GameServer.GameIdList{Ids: ids}, err
 	}
 	
 	defer rows.Close()
@@ -30,7 +30,7 @@ func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *Gam
 		
 		if err != nil {
 			log.Fatal(err)
-			return &GameServer.GameIdList{ids}, err
+			return &GameServer.GameIdList{Ids: ids}, err
 		}
 		
 		var gameId *GameServer.GameId
@@ -45,13 +45,14 @@ func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *Gam
 	
 	//ids[0] = &GameServer.GameId{"id 1"}
 	
-	return &GameServer.GameIdList{ids}, nil
+	return &GameServer.GameIdList{Ids: ids}, nil
 }
 
 func (s *AvailableGameServer) GetGameDetails(ctx context.Context, id *GameServer.GameId) (*GameServer.GameDetails, error) {
 	var details *GameServer.GameDetails
 	
-	err := db.QueryRow("SELECT * FROM GAME WHERE ID = ?", id.GetId()).Scan(details)
+	err := db.QueryRow("SELECT ID, TITLE, CONSOLE, RELEASE_DATE, DEVELOPER, PUBLISHER, GENRE, PLAYERS, PRICE FROM GAME WHERE ID = ?", id.GetId()).
+		Scan(details.Id, details.Title, details.Console, details.ReleaseDate, details.Developer, details.Publisher, details.Genre, details.Players, details.Price)
 	
 	if err != nil {
 		log.Fatalf("Get game id: %s Error: %s", id.GetId(), err)

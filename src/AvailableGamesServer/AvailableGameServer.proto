@@ -34,4 +34,5 @@ message GameDetails {
     string publisher = 6;
     string genre = 7;
     int32 players = 8;
+    float price = 9;
 }

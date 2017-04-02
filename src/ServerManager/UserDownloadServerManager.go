@@ -67,7 +67,7 @@ func (s *UserDownloadServer) AvailableDownloads(ctx context.Context, in *Downloa
 		if err != nil {
 			log.Fatal(err)
 		}
-		downloads = append(downloads, &DownloadServer.Game{Id : gameId})
+		downloads = append(downloads, &DownloadServer.Game{Id: gameId})
 	}
 	
 	if err := rows.Err(); err != nil {
@@ -75,5 +75,5 @@ func (s *UserDownloadServer) AvailableDownloads(ctx context.Context, in *Downloa
 		return nil, err
 	}
 	
-	return &DownloadServer.DownloadsList{downloads}, nil
+	return &DownloadServer.DownloadsList{Games: downloads}, nil
 }
