@@ -79,12 +79,12 @@ func (s *LoginServer) RegisterUser(ctx context.Context, in *UserServer.RegisterR
 	userExists, err := s.CheckUserExists(ctx, &UserServer.UserQuery{Username: in.Username, Email: in.Email})
 	if err != nil {
 		log.Fatal(err)
-		reply.Error = UserServer.RegisterStatus_TAKEN_USERNAME
+		reply.Status = UserServer.RegisterStatus_TAKEN_USERNAME
 		return reply, err
 	}
 	
 	if !userExists.Exists {
-		reply.Error = UserServer.RegisterStatus_TAKEN_USERNAME
+		reply.Status = UserServer.RegisterStatus_TAKEN_USERNAME
 		return reply, nil
 	}
 	
@@ -94,7 +94,7 @@ func (s *LoginServer) RegisterUser(ctx context.Context, in *UserServer.RegisterR
 	
 	if err != nil {
 		log.Fatal(err)
-		reply.Error = UserServer.RegisterStatus_TAKEN_USERNAME
+		reply.Status = UserServer.RegisterStatus_TAKEN_USERNAME
 		return reply, err
 	}
 	
