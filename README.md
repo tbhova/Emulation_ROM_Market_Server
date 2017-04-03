@@ -28,4 +28,11 @@ go get -u github.com/golang/lint/golint
 go get -u github.com/golang/protobuf/protoc-gen-go
 go get -u github.com/golang/protobuf/proto
 ```
+# Generate protoc code
 
+```
+protoc --go_out=plugins=grpc:. MarketServer/MarketServer.proto
+protoc --go_out=plugins=grpc:. AvailableGamesServer/AvailableGameServer.proto
+protoc --go_out=plugins=grpc:. UserDownloadServer/UserDownloadServer.proto
+protoc --go_out=plugins=grpc:. UserServer/UserServer.proto
+```
