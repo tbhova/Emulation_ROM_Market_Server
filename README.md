@@ -31,6 +31,13 @@ go get -u github.com/golang/protobuf/proto
 # Generate protoc code
 
 ```
+cd src
+make
+```
+
+OR
+
+```
 protoc --go_out=plugins=grpc:. MarketServer/MarketServer.proto
 protoc --go_out=plugins=grpc:. AvailableGamesServer/AvailableGameServer.proto
 protoc --go_out=plugins=grpc:. UserDownloadServer/UserDownloadServer.proto
