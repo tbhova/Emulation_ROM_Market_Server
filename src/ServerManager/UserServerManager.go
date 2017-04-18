@@ -10,7 +10,7 @@ import (
 // Data type use to implement login server service
 type LoginServer struct{}
 
-func RunLoginServer() {
+func runLoginServer() {
 	UserServer.RegisterUserServerServer(s, &LoginServer{})
 }
 
@@ -20,7 +20,7 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 	reply.EmailExists = false
 	reply.UsernameExists = false
 	
-	rows, err := db.Query("SELECT USERNAME FROM USERS WHERE USERNAME = ? OR EMAIL = ?", in.Username)
+	rows, err := db.Query("SELECT USERNAME FROM USERS WHERE USERNAME = $1 OR EMAIL = $2", in.Username)
 	if err != nil {
 		log.Fatal(err)
 		return reply, err
@@ -28,7 +28,7 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 	
 	for rows.Next() {
 		var username string
-		err := rows.Scan(username)
+		err := rows.Scan(&username)
 		if err != nil {
 			log.Fatal(err)
 			return reply, err
@@ -39,7 +39,7 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 		}
 	}
 	
-	rows, err = db.Query("SELECT EMAIL FROM USERS WHERE EMAIL = ?", in.Email)
+	rows, err = db.Query("SELECT EMAIL FROM USERS WHERE EMAIL = $1", in.Email)
 	if err != nil {
 		log.Fatal(err)
 		return reply, err
@@ -47,7 +47,7 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 	
 	for rows.Next() {
 		var email string
-		err := rows.Scan(email)
+		err := rows.Scan(&email)
 		if err != nil {
 			log.Fatal(err)
 			return reply, err
@@ -79,7 +79,7 @@ func (s *LoginServer) UserLogin(ctx context.Context, in *UserServer.LoginRequest
 	}
 	
 	var userId string
-	err = db.QueryRow("SELECT ID FROM USER WHERE USER = ? AND PASSWORD = ?").Scan(userId)
+	err = db.QueryRow("SELECT ID FROM USER WHERE USER = $1 AND PASSWORD = $2").Scan(&userId)
 	
 	switch {
 	case err == sql.ErrNoRows:
@@ -116,8 +116,8 @@ func (s *LoginServer) RegisterUser(ctx context.Context, in *UserServer.RegisterR
 	}
 	
 	var userId string
-	err = db.QueryRow("INSERT INTO USER (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASSWORD) VALUES (?, ?, ?, ?, ?) RETURNING ID",
-		in.FistName, in.LastName, in.Email, in.Username, in.Password,).Scan(userId)
+	err = db.QueryRow("INSERT INTO USER (FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASSWORD) VALUES ($1, $2, $3, $4, $5) RETURNING ID",
+		in.FistName, in.LastName, in.Email, in.Username, in.Password,).Scan(&userId)
 	
 	if err != nil {
 		log.Fatal(err)
