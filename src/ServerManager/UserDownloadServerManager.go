@@ -21,7 +21,7 @@ func (s *UserDownloadServer) DownloadGame(ctx context.Context, in *DownloadServe
 	response.S3DownloadLink = ""
 	
 	// Check for valid user credentials
-	var login *LoginServer
+	var login *LoginServer = new(LoginServer)
 	loginResponse, err := login.UserLogin(context.Background(), &(UserServer.LoginRequest{Username: in.Username, Password: in.Password}))
 	if err != nil || loginResponse.Status != UserServer.LoginReply_OK {
 		log.Printf("DownloadGame: invalid credentials provided for user %s", in.Username)

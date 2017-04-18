@@ -16,7 +16,7 @@ func runLoginServer() {
 
 // Define UsernameAvailable
 func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQuery) (*UserServer.UsernameAvailable, error) {
-	var reply *UserServer.UsernameAvailable
+	var reply *UserServer.UsernameAvailable = new(UserServer.UsernameAvailable)
 	reply.EmailExists = false
 	reply.UsernameExists = false
 	
@@ -63,7 +63,7 @@ func (s *LoginServer) CheckUserExists(ctx context.Context, in *UserServer.UserQu
 
 // Define LoginUser
 func (s *LoginServer) UserLogin(ctx context.Context, in *UserServer.LoginRequest) (*UserServer.LoginReply, error) {
-	var reply *UserServer.LoginReply
+	var reply *UserServer.LoginReply = new(UserServer.LoginReply)
 	reply.Id = ""
 	
 	userExists, err := s.CheckUserExists(ctx, &UserServer.UserQuery{Username: in.Username})
