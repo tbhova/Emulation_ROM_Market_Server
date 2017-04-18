@@ -10,7 +10,7 @@ import (
 type AvailableGameServer struct{}
 
 func runAvailableGameServer() {
-	GameServer.RegisterAvialableGameServerServer(s, &AvailableGameServer{})
+	GameServer.RegisterAvailableGameServerServer(s, &AvailableGameServer{})
 }
 
 func (s *AvailableGameServer) GetAvailableGamesList(ctx context.Context, in *GameServer.GameFilters) (*GameServer.GameIdList, error) {
