@@ -1,7 +1,7 @@
 package ServerManager
 
 import (
-	GameServer "AvailableGamesServer"
+	GameServer "AvailableGameServer"
 	"golang.org/x/net/context"
 	"log"
 )
