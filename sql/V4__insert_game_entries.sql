@@ -1,0 +1,27 @@
+INSERT INTO USERS (ID, FIRST_NAME, LAST_NAME, EMAIL, USERNAME, PASSWORD) VALUES (
+    '26fe1f9e-25e6-11e7-93ae-92361f002671', 'First', 'Last', 'games@horganes.com', 'download', 'password'
+);
+
+INSERT INTO GAME (ID, TITLE, CONSOLE, RELEASE_DATE, DEVELOPER, PUBLISHER, GENRE, PLAYERS, PRICE, S3LINK) VALUES
+    ('4e16ad2a-25e7-11e7-93ae-92361f002671', 'The Legend of Zelda', 'nes', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Legend of Zelda, The.nes'),
+    ('5c9e39d0-25e7-11e7-93ae-92361f002671', '', 'nes', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, ''),
+    ('6ac00d0e-25e7-11e7-93ae-92361f002671', '', 'nes', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, ''),
+    ('74bfab5c-25e7-11e7-93ae-92361f002671', '', 'nes', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, ''),
+    ('', '', '', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, '');
+
+INSERT INTO PURCHASE (USER_ID, GAME_ID, PURCHASE_DATE) VALUES
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '4e16ad2a-25e7-11e7-93ae-92361f002671', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '5c9e39d0-25e7-11e7-93ae-92361f002671', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '6ac00d0e-25e7-11e7-93ae-92361f002671', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '74bfab5c-25e7-11e7-93ae-92361f002671', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD')),
+    ('26fe1f9e-25e6-11e7-93ae-92361f002671', '', TO_DATE('2017-03-20', 'YYYY-MM-DD'));
