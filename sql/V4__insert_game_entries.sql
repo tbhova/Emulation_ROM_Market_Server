@@ -15,7 +15,7 @@ INSERT INTO GAME (ID, TITLE, CONSOLE, RELEASE_DATE, DEVELOPER, PUBLISHER, GENRE,
     ('52666ff8-25ee-11e7-93ae-92361f002671', 'Super Mario 64', 'n64', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Super Mario 64.n64'),
     ('67d2781e-25ee-11e7-93ae-92361f002671', 'Super Smash Bros', 'n64', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Super Smash Bros.n64'),
     ('7033551e-25ee-11e7-93ae-92361f002671', 'Donkey Kong 64', 'n64', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'n64'),
-    ('738f20d0-25ee-11e7-93ae-92361f002671', 'Spyro the Dragon', 'psx', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Spyro the Dragon.bin/Spyron the Dragon.cue'),
+    ('738f20d0-25ee-11e7-93ae-92361f002671', 'Spyro the Dragon', 'psx', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Spyro the Dragon.bin/Spyro the Dragon.cue'),
     ('7db45ed6-25ee-11e7-93ae-92361f002671', 'Asteroids.a78', 'atari7800', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Asteroids.a78'),
     ('85fb915e-25ee-11e7-93ae-92361f002671', 'Pole Position II', 'atari7800', TO_DATE('2016-04-01', 'YYYY-MM-DD'), '', '', '', 1, 4.99, 'Pole Position II.a78');
 
